@@ -4,6 +4,7 @@ version       = "0.1.0"
 author        = "Adel Qalieh"
 description   = "Universally Unique Lexicographically Sortable Identifier"
 license       = "MIT"
+srcDir        = "src"
 
 # Dependencies
 
