@@ -6,11 +6,14 @@ const
   alphabet_size = len(alphabet)
 
 proc randFloat(): float =
-  var buf = random.urandom(2)
-  let offset = 0
-  let rand = (cast[uint16](buf[offset]) shl 0) or
-             (cast[uint16](buf[offset+1]) shl 8)
-  return float(rand) / 0xFFFF
+  try:
+    var buf = random.urandom(2)
+    let offset = 0
+    let rand = (cast[uint16](buf[offset]) shl 0) or
+               (cast[uint16](buf[offset+1]) shl 8)
+    return float(rand) / 0xFFFF
+  except OSError:
+    return random()
 
 proc encode_time(now: int): string =
   result = ""
