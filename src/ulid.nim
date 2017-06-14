@@ -31,5 +31,8 @@ proc encode_random(length = 16): string =
     rand = int(randFloat() * alphabet_size)
     result = alphabet[rand] & result
 
-proc ulid*(): string =
-  return encode_time(int(times.epochTime() * 1000)) & encode_random()
+proc ulid*(now = 0): string =
+  var now = now
+  if now == 0:
+    now = int(times.epochTime() * 1000)
+  return encode_time(now) & encode_random()
