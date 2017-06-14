@@ -15,19 +15,19 @@ proc randFloat(): float =
   except OSError:
     return random()
 
-proc encode_time(now: int): string =
+proc encode_time(now: int, length = 10): string =
   result = ""
   var now = now
   var mo: int
-  for x in 1..10:
+  for x in 1..length:
     mo = now mod alphabet_size
     result = alphabet[mo] & result
     now = (now - mo) div alphabet_size
 
-proc encode_random(): string =
+proc encode_random(length = 16): string =
   result = ""
   var rand: int
-  for x in 1..16:
+  for x in 1..length:
     rand = int(randFloat() * alphabet_size)
     result = alphabet[rand] & result
 
