@@ -10,3 +10,10 @@ srcDir        = "src"
 
 requires "nim >= 0.16.0", "random 0.5.3"
 
+# Tasks
+
+task test, "Runs the test suite":
+  exec "nim c -r tests/test.nim"
+
+task perf, "Runs the benchmark":
+  exec "nim c -r -d:release tests/bench.nim"

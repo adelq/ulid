@@ -149,3 +149,23 @@ Partly inspired by:
 - http://instagram-engineering.tumblr.com/post/10853187575/sharding-ids-at-instagram
 - https://firebase.googleblog.com/2015/02/the-2120-ways-to-ensure-unique_68.html
 
+
+## Test Suite
+
+```
+nimble test
+```
+
+## Performance
+
+```
+nimble perf
+```
+
+```
+ulid.nim                                                  time/iter  iters/s
+============================================================================
+encode_time                                                392.73ns    2.55M
+encode_random                                                7.08us  141.29K
+ulid                                                         7.95us  125.71K
+```
