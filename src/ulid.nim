@@ -1,5 +1,5 @@
-import times
-import "random-0.5.3/random"
+import times, random
+import "random-0.5.6/random" as randomPkg
 
 const
   alphabet = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
@@ -7,13 +7,20 @@ const
 
 proc randFloat(): float =
   try:
-    var buf = random.urandom(2)
+    var buf = randomPkg.urandom(2)
     let offset = 0
     let rand = (cast[uint16](buf[offset]) shl 0) or
                (cast[uint16](buf[offset+1]) shl 8)
     return float(rand) / 0xFFFF
   except OSError:
-    return random()
+    randomize()
+    var buf = newSeq[uint8]()
+    buf.add(rand(uint8))
+    buf.add(rand(uint8))
+    let offset = 0
+    let rand = (cast[uint16](buf[offset]) shl 0) or
+               (cast[uint16](buf[offset+1]) shl 8)
+    return float(rand) / 0xFFFF
 
 proc encode_time(now: int, length = 10): string =
   result = ""
