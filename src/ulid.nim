@@ -1,26 +1,11 @@
-import times, random
-import "random-0.5.6/random" as randomPkg
+import times
+import pkg/random
 
 const
   alphabet = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
   alphabet_size = len(alphabet)
 
-proc randFloat(): float =
-  try:
-    var buf = randomPkg.urandom(2)
-    let offset = 0
-    let rand = (cast[uint16](buf[offset]) shl 0) or
-               (cast[uint16](buf[offset+1]) shl 8)
-    return float(rand) / 0xFFFF
-  except OSError:
-    randomize()
-    var buf = newSeq[uint8]()
-    buf.add(rand(uint8))
-    buf.add(rand(uint8))
-    let offset = 0
-    let rand = (cast[uint16](buf[offset]) shl 0) or
-               (cast[uint16](buf[offset+1]) shl 8)
-    return float(rand) / 0xFFFF
+var rng = initSystemRandom()
 
 proc encode_time(now: int, length = 10): string =
   result = ""
@@ -35,7 +20,7 @@ proc encode_random(length = 16): string =
   result = ""
   var rand: int
   for x in 1..length:
-    rand = int(randFloat() * alphabet_size)
+    rand = rng.randomInt(0, alphabet_size)
     result = alphabet[rand] & result
 
 proc ulid*(now = 0): string =
