@@ -165,7 +165,7 @@ nimble perf
 ```
 ulid.nim                                                  time/iter  iters/s
 ============================================================================
-encode_time                                                392.73ns    2.55M
-encode_random                                                7.08us  141.29K
-ulid                                                         7.95us  125.71K
+encode_time                                                319.93ns    3.13M
+encode_random                                                3.57us  280.33K
+ulid                                                         3.85us  259.78K
 ```
