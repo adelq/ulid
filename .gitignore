@@ -1,2 +1,6 @@
 ### Nim ###
 nimcache/
+# Binaries
+src/ulid
+tests/test
+tests/bench
